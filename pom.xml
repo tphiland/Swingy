@@ -26,7 +26,8 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-<!--javav.validation-->
+
+    <!--javav.validation-->
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
@@ -56,8 +57,8 @@
       <artifactId>javax.el</artifactId>
       <version>2.2.6</version>
     </dependency>
+ <!--javav.validation-->
 
-<!--javav.validation-->
   </dependencies>
 
   <build>

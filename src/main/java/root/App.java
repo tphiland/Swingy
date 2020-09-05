@@ -1,15 +1,26 @@
 package root;
 
-import root.gui.TestFrame;
-import root.model.User;
+import root.GUI.TestFrame;
+import root.model.*;
 
-import javax.swing.*;
-import javax.validation.*;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class App
 {
     public static void main( String[] args ) {
+//        HeroGenerator heroGenerator= new HeroGenerator();
+//        Hero myHero = heroGenerator.createNewHero("Barbarian", "Jakob");
+//        System.out.println(myHero.toString());
+
+        MapGenerator mapGenerator = new MapGenerator(1);
+        ArrayList<Coordinates> map = mapGenerator.createMap();
+        for (Coordinates i : map)
+            System.out.println(i.toString());
+    }
+}
+
+
+
 
 //annotation validation via javax.validation example
 //        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -29,9 +40,6 @@ public class App
 //annotation validation javax.validation example
 
 //GUI and event driven programming via Swing example
-        TestFrame testFrame = new TestFrame(640, 480);
-        testFrame.setUpGUI();
-
-
-    }
-}
+//        TestFrame testFrame = new TestFrame(1920, 1080);
+//        testFrame.setUpGUI();
+//GUI and event driven programming via Swing example

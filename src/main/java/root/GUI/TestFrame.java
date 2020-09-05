@@ -1,4 +1,4 @@
-package root.gui;
+package root.GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class TestFrame extends JFrame {
 
     public void setUpGUI() {
         setSize(width, height);
-        setTitle("My Java App");
+        setTitle("Swingy");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(button);
         button.addActionListener(myActionListener);
