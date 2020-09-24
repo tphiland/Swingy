@@ -1,6 +1,8 @@
 package root.model;
 
-public class Stats {
+import java.io.Serializable;
+
+public class Stats implements Serializable {
 
     private int attack;
     private int defense;
@@ -44,4 +46,5 @@ public class Stats {
                 ", health=" + health +
                 '}';
     }
+
 }

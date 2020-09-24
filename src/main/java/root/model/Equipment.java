@@ -1,6 +1,8 @@
 package root.model;
 
-public class Equipment {
+import java.io.Serializable;
+
+public class Equipment implements Serializable {
 
     private int weapon;
     private int armor;
@@ -28,6 +30,15 @@ public class Equipment {
 
     public void setHelm(int helm) {
         this.helm = helm;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipment{" +
+                "weapon=" + weapon +
+                ", armor=" + armor +
+                ", helm=" + helm +
+                '}';
     }
 
 }
