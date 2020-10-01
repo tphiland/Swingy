@@ -1,32 +1,57 @@
 package root.controller;
 
 import globals.Globals;
+import root.App;
 import root.model.Hero;
+import root.view.Gui;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 public class Movement {
 
-    public void move(Hero hero) {
+    public void move(Hero hero) throws InterruptedException, IOException {
         Globals.heroPreviousX = hero.getX();
         Globals.heroPreviousY = hero.getY();
-        System.out.println("North = 'w', East = 'd', South = 's', West = 'a'");
+        System.out.println("North = 'w', East = 'd', South = 's', West = 'a' switch to gui = 'gui'");
 
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
+        String str;
+        if (Globals.gameMode.equals("console"))
+            str = new Scanner(System.in).next();
+        else
+            str = App.gui.getInput();
 
-        if (str.equals("w"))
-            hero.setY(hero.getY() + 1);
-        else if (str.equals("d"))
-            hero.setX(hero.getX() + 1);
-        else if (str.equals("s"))
-            hero.setY(hero.getY() - 1);
-        else if (str.equals("a"))
-            hero.setX(hero.getX() - 1);
+        switch (str) {
+            case "w":
+                hero.setY(hero.getY() + 1);
+                break;
+            case "d":
+                hero.setX(hero.getX() + 1);
+                break;
+            case "s":
+                hero.setY(hero.getY() - 1);
+                break;
+            case "a":
+                hero.setX(hero.getX() - 1);
+                break;
+            case "gui":
+                Globals.gameMode = "gui";
+                Gui.setOutput(Gui.myPrintStream);
+                break;
+            default:
+                System.out.println("incorrect value");
+                if (Globals.gameMode.equals("gui"))
+                    sleep(5000);
+                System.exit(0);
+        }
 
         if (hero.getX() == 0 || hero.getY() == 0 || hero.getX() == Globals.mapBorder || hero.getY() == Globals.mapBorder) {
             System.out.println("You win");
             new HeroContinuation().saveHero(hero);
+            if (Globals.gameMode.equals("gui"))
+                sleep(5000);
             System.exit(0);
         }
     }
