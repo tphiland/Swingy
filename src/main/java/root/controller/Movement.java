@@ -37,6 +37,10 @@ public class Movement {
                 hero.setX(hero.getX() - 1);
                 break;
             case "gui":
+                if (Globals.gameModeInitial.equals("console")) {
+                    App.gui.setUpGUI();
+                    Globals.gameModeInitial = "gui";
+                }
                 Globals.gameMode = "gui";
                 Gui.setOutput(Gui.myPrintStream);
                 break;

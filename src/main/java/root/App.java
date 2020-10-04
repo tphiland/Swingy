@@ -17,6 +17,7 @@ public class App {
 
     public static void main( String[] args ) throws IOException, InterruptedException {
         Globals.gameMode = args[0];
+        Globals.gameModeInitial = args[0];
         if (Globals.gameMode.equals("gui"))
             gui.setUpGUI();
 

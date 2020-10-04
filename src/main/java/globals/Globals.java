@@ -7,4 +7,5 @@ public class Globals {
     public static int mapBorder;
     public static int heroPreviousX, heroPreviousY;
     public static String gameMode;
+    public static String gameModeInitial;
 }
