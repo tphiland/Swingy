@@ -16,7 +16,17 @@ public class App {
     public static Gui gui = new Gui();
 
     public static void main( String[] args ) throws IOException, InterruptedException {
-        Globals.gameMode = args[0];
+
+        try {
+            Globals.gameMode = args[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("please parse argument");
+            System.exit(0);
+        }
+        if (!args[0].equals("console") && !args[0].equals("gui")) {
+            System.out.println("gui or console");
+            System.exit(0);
+        }
         Globals.gameModeInitial = args[0];
         if (Globals.gameMode.equals("gui"))
             gui.setUpGUI();
