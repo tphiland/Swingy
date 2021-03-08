@@ -2,8 +2,8 @@ package root.model;
 
 public class Coordinates {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private Monster monster;
 
     public Coordinates(int x, int y, Monster monster) {

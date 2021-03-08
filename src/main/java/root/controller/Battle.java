@@ -1,7 +1,6 @@
 package root.controller;
 
 import globals.Globals;
-import root.App;
 import root.model.Hero;
 import root.model.Monster;
 import root.model.Stats;
@@ -9,11 +8,9 @@ import root.model.Stats;
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.Thread.sleep;
-
 public class Battle {
 
-    public void startBattle (Hero hero, Monster monster) throws InterruptedException {
+    public void startBattle (Hero hero, Monster monster) {
         Stats monsterStats = monster.getStats();
         Stats heroStats = hero.getStats();
         System.out.println(hero.toString());
@@ -40,8 +37,6 @@ public class Battle {
 
             }
             System.out.println("Monster Wins");
-            if (Globals.gameMode.equals("gui"))
-                sleep(5000);
             System.exit(0);
         }
     }
@@ -69,10 +64,7 @@ public class Battle {
             if (i == 0) {
                 System.out.println("Weapon(" + artifactStrength + ") dropped.\n'y' to equip");
                 String str;
-                if (Globals.gameMode.equals("console"))
-                    str = scanner.next();
-                else
-                    str = App.gui.getInput();
+                str = scanner.next();
                 if (str.equals("y")) {
                     hero.getStats().setAttack(hero.getStats().getAttack() - hero.getEquipment().getWeapon());
                     hero.getEquipment().setWeapon(artifactStrength);
@@ -82,10 +74,7 @@ public class Battle {
             if (i == 1) {
                 System.out.println("Helm(" + artifactStrength + ") dropped.\n'y' to equip");
                 String str;
-                if (Globals.gameMode.equals("console"))
-                    str = scanner.next();
-                else
-                    str = App.gui.getInput();
+                str = scanner.next();
                 if (str.equals("y")) {
                     hero.getStats().setHealth(hero.getStats().getHealth() - hero.getEquipment().getHelm());
                     hero.getEquipment().setHelm(artifactStrength);
@@ -95,10 +84,7 @@ public class Battle {
             if (i == 2) {
                 System.out.println("Armour(" + artifactStrength + ") dropped.\n'y' to equip");
                 String str;
-                if (Globals.gameMode.equals("console"))
-                    str = scanner.next();
-                else
-                    str = App.gui.getInput();
+                str = scanner.next();
                 if (str.equals("y")) {
                     hero.getStats().setDefense(hero.getStats().getDefense() - hero.getEquipment().getArmor());
                     hero.getEquipment().setArmor(artifactStrength);
@@ -111,10 +97,7 @@ public class Battle {
         System.out.println("'y' to fight, '*' to try and flee.");
         Scanner scanner = new Scanner(System.in);
         String answer;
-        if (Globals.gameMode.equals("console"))
-            answer = scanner.next();
-        else
-            answer = App.gui.getInput();
+        answer = scanner.next();
         if (answer.equals("y")) {
             return true;
         }

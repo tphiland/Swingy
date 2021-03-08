@@ -1,56 +1,36 @@
 package root;
 
 import globals.Globals;
-import root.controller.*;
-import root.model.*;
-import root.view.Gui;
+import root.controller.Battle;
+import root.controller.HeroContinuation;
+import root.controller.Movement;
+import root.model.Coordinates;
+import root.model.Hero;
+import root.model.HeroGenerator;
+import root.model.MapGenerator;
 
-import javax.validation.*;
-import java.io.IOException;
-import java.util.*;
-
-import static java.lang.Thread.sleep;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Set;
 
 public class App {
 
-    public static Gui gui = new Gui();
-
-    public static void main( String[] args ) throws IOException, InterruptedException {
-
-        try {
-            Globals.gameMode = args[0];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("please parse argument");
-            System.exit(0);
-        }
-        if (!args[0].equals("console") && !args[0].equals("gui")) {
-            System.out.println("gui or console");
-            System.exit(0);
-        }
-        Globals.gameModeInitial = args[0];
-        if (Globals.gameMode.equals("gui"))
-            gui.setUpGUI();
-
+    public static void main( String[] args ) {
         Hero hero;
         Scanner scanner = new Scanner(System.in);
         System.out.println("'1' to create new Hero, '*' to load Hero");
         String chooseHero;
-        if (Globals.gameMode.equals("console"))
-            chooseHero = scanner.next();
-        else
-            chooseHero = gui.getInput();
+        chooseHero = scanner.next();
         if (chooseHero.equals("1")) {
             System.out.println("Choose hero class: 'Assassin', 'Barbarian' or 'Knight'");
             String heroClass;
-            if (Globals.gameMode.equals("console"))
-                heroClass = scanner.next();
-            else
-                heroClass = gui.getInput();
+            heroClass = scanner.next();
             System.out.println("Enter name:");
-            if (Globals.gameMode.equals("console"))
-                hero = new HeroGenerator().createNewHero(heroClass, scanner.next());
-            else
-                hero = new HeroGenerator().createNewHero(heroClass, gui.getInput());
+            hero = new HeroGenerator().createNewHero(heroClass, scanner.next());
         }
         else {
             hero = new HeroContinuation().loadHero();
@@ -79,15 +59,13 @@ public class App {
         }
     }
 
-    private static void validate(Hero hero) throws InterruptedException {
+    private static void validate(Hero hero) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Hero>> violations = validator.validate(hero);
         for (ConstraintViolation<Hero> violation : violations) {
             if (violation.getMessage() != null) {
                 System.out.println(violation.getMessage());
-                if (Globals.gameMode.equals("gui"))
-                    sleep(5000);
                 System.exit(0);
             }
         }
