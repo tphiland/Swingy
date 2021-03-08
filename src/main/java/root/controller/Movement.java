@@ -10,7 +10,7 @@ public class Movement {
     public void move(Hero hero) {
         Globals.heroPreviousX = hero.getX();
         Globals.heroPreviousY = hero.getY();
-        System.out.println("North = 'w', East = 'd', South = 's', West = 'a' switch to gui = 'gui'");
+        System.out.println("North = 'w', East = 'd', South = 's', West = 'a'");
 
         String str;
         str = new Scanner(System.in).next();
